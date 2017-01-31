@@ -26,15 +26,21 @@ describe('Deck', function () {
             allCards = [];
 
         figures.forEach(function (figure) {
-            colors.forEach( function (color) {
+            colors.forEach(function (color) {
                 allCards.push(figure + color);
             })
         });
-
         expect(deck.getAllCards()).to.deep.equal(allCards);
-
     });
 
+    it('should take five cards from deck', function () {
+        var myHand = deck.getMyHand();
+        expect(myHand.length).to.equal(5);
+    });
+
+    it('should return win combination', function () {
+
+    });
 });
 
 

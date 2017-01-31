@@ -1,34 +1,44 @@
 function Deck() {
-    var _numberOfCardsInOneColor = 13,
+    var me = this,
+        _numberOfCardsInOneColor = 13,
+        _handSize = 5,
         _cardsColors = ["s", "c", "d", "h"],
         _figures = ["2", "3", "4", "5", "6", "7", "8", "9", "10",
             "J", "Q", "K", "A"],
         _allCards = [];
 
-    this.getNumberOfCardsInOneColor = _getNumberOfCardsInOneColor;
-    this.getColorsOfCards = _getColorsOfCards;
-    this.getFigures = _getFigures;
-    this.getAllCards = _getAllCards;
-
-    function _getNumberOfCardsInOneColor() {
+    me.getNumberOfCardsInOneColor = function() {
         return _numberOfCardsInOneColor;
-    }
+    };
 
-    function _getColorsOfCards() {
+    me.getColorsOfCards = function () {
         return _cardsColors;
-    }
+    };
 
-    function _getFigures() {
+    me.getFigures = function() {
         return _figures;
-    }
+    };
 
-    function _getAllCards() {
+    me.getAllCards = function() {
         return _allCards;
-    }
+    };
+
+    me.getMyHand = function() {
+        var id,
+            hand = [];
+
+        for (var i = 0; i < _handSize; i++) {
+            id = Math.floor(Math.random() * _allCards.length);
+            hand.push(_allCards[id]);
+            _allCards.splice(id, 1);
+        }
+
+        return hand;
+    };
 
     function _createAllCards() {
-        var figures = _getFigures(),
-            colors = _getColorsOfCards();
+        var figures = me.getFigures(),
+            colors = me.getColorsOfCards();
 
         figures.forEach(function (figure) {
             colors.forEach(function (color) {
