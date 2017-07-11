@@ -38,9 +38,27 @@ describe('Deck', function () {
         expect(myHand.length).to.equal(5);
     });
 
-    it('should return win combination', function () {
-
+    it('should return one pair winCombination', function () {
+        var myHand = ["2s", "2d", "3d", "6h", "Kc"];
+        expect(deck.getOnePair(myHand)).to.deep.equal(["2s", "2d"]);
     });
+
+    it('should return empty array if hand doesn\'t have one pair winCombination', function () {
+        var myHand = ["2s", "4d", "3d", "6h", "Kc"];
+        expect(deck.getOnePair(myHand)).to.deep.equal([]);
+    });
+
+    it('should return two pairs if hand has 2 pairs combination', function () {
+        var myHand = ["2s", "2d", "4h", "4d", "5h"];
+        expect(deck.getTwoPairs(myHand)).to.deep.equal(["2s", "2d", "4h", "4d"]);
+    });
+
+    it('should return empty array if hand doesn\'t have 2 pairs combination', function () {
+        var myHand = ["2s", "2d", "4h", "6d", "5h"];
+        expect(deck.getTwoPairs(myHand)).to.deep.equal([]);
+    });
+
+
 });
 
 

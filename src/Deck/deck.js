@@ -7,7 +7,7 @@ function Deck() {
             "J", "Q", "K", "A"],
         _allCards = [];
 
-    me.getNumberOfCardsInOneColor = function() {
+    me.getNumberOfCardsInOneColor = function () {
         return _numberOfCardsInOneColor;
     };
 
@@ -15,15 +15,15 @@ function Deck() {
         return _cardsColors;
     };
 
-    me.getFigures = function() {
+    me.getFigures = function () {
         return _figures;
     };
 
-    me.getAllCards = function() {
+    me.getAllCards = function () {
         return _allCards;
     };
 
-    me.getMyHand = function() {
+    me.getMyHand = function () {
         var id,
             hand = [];
 
@@ -34,6 +34,42 @@ function Deck() {
         }
 
         return hand;
+    };
+
+    me.getOnePair = function (hand) {
+        var figure,
+            pair = [],
+            currentFigures = {};
+
+        hand.forEach(function (card) {
+            figure = card[0];
+            if (!currentFigures[figure]) {
+                currentFigures[figure] = card;
+            } else {
+                pair = [currentFigures[figure], card];
+            }
+        });
+
+        return pair;
+    };
+
+    me.getTwoPairs = function (hand) {
+        var copyHand = hand.slice(),
+            pairOne = this.getOnePair(copyHand),
+            pairTwo;
+
+        if (pairOne) {
+            copyHand.splice(copyHand.indexOf(pairOne[0]), 1);
+            copyHand.splice(copyHand.indexOf(pairOne[1]), 1);
+
+            pairTwo = this.getOnePair(copyHand);
+
+            if(pairTwo.length) {
+                return pairTwo.concat(pairOne);
+            }
+        }
+
+        return [];
     };
 
     function _createAllCards() {
