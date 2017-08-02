@@ -64,7 +64,7 @@ function Deck() {
 
             pairTwo = this.getOnePair(copyHand);
 
-            if(pairTwo.length) {
+            if (pairTwo.length) {
                 return pairTwo.concat(pairOne);
             }
         }
@@ -72,6 +72,36 @@ function Deck() {
         return [];
     };
 
+    me.getThreeOfaKind = function (hand) {
+        var counts = {};
+
+        for (var i = 0; i < hand.length; i++) {
+            if (!counts[hand[i][0]])
+                counts[hand[i][0]] = [];
+
+            counts[hand[i][0]].push(hand[i]);
+        }
+
+        var keys = Object.keys(counts);
+        for (var i = 0; i < keys.length; i++)
+            if (counts[keys[i]].length === 3)
+                return counts[keys[i]];
+
+        return [];
+    };
+
+    me.getFourOfaKind = function (hand) {
+        for (var i = 0; i < 2; i++) {
+            var figure = hand[i][0];
+            var result = hand.filter(function (card) {
+                return figure === card[0];
+            });
+            if (result.length === 4)
+                return result;
+        }
+
+        return null;
+    };
     function _createAllCards() {
         var figures = me.getFigures(),
             colors = me.getColorsOfCards();

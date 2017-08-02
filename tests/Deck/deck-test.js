@@ -58,6 +58,14 @@ describe('Deck', function () {
         expect(deck.getTwoPairs(myHand)).to.deep.equal([]);
     });
 
+    it('should return three of a kind if hand has 3 cards combination', function () {
+        var myHand = ["2s", "2d", "2h", "4d", "5h"];
+        expect(deck.getThreeOfaKind(myHand)).to.deep.equal(["2s", "2d", "2h"]);
+    });
+    it('should return four of a kind if hand has 4 cards combination', function () {
+        var myHand = ["2s", "2d", "2h", "2c", "5h"];
+        expect(deck.getFourOfaKind(myHand)).to.deep.equal(["2s", "2d","2h","2c"]);
+    });
 
 });
 
